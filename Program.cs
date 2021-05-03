@@ -105,7 +105,13 @@ namespace RhythmsGonnaGetYou
                             var pineapple = PromptForString("Would you like to unsign any bands? y/n ");
                             if (pineapple == "y")
                             {
-
+                                var mango = PromptForString("What band would you like to unsign? ");
+                                var foundBand = context.Bands.FirstOrDefault(band => band.Name == mango);
+                                if (mango == null)
+                                {
+                                    Console.WriteLine("No band by that name is signed! ");
+                                }
+                                else
                             }
                             else if (pineapple == "n")
                             {
@@ -116,8 +122,8 @@ namespace RhythmsGonnaGetYou
                     }
                     else if (bandOptions == "V3")
                     {
-                        var signedBands = context.Bands.Where(s => s.IsSigned == false);
-                        foreach (var band in signedBands)
+                        var unSignedBands = context.Bands.Where(s => s.IsSigned == false);
+                        foreach (var band in unSignedBands)
                         {
                             Console.WriteLine($"{band.Name} are not signed! ");
                             var pineapple = PromptForString("Would you like to sign any bands? y/n");
@@ -185,7 +191,7 @@ namespace RhythmsGonnaGetYou
                         newAlbum.Title = PromptForString("What is the track number of the new song? ");
                         newAlbum.IsExplicit =
                         newAlbum.ReleaseDate =
-                        newAlbum.BandId = PromptForInteger("");
+                        newAlbum.BandId =
 
                         context.Albums.Add(newAlbum);
                         context.SaveChanges();
